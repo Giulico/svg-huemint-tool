@@ -23,16 +23,18 @@ export default function Output({ colors }) {
   if (isLoading || colors.length !== palette.length) return null;
 
   return (
-    <Box sx={{ p: 3, flex: "1 1 auto" }}>
-      <ErrorBoundary fallback={<p>Something went wrong</p>}>
-        <Box
-          sx={{
-            maxWidth: "65%",
-            mx: "auto",
-          }}
-          dangerouslySetInnerHTML={{ __html: output }}
-        />
-      </ErrorBoundary>
-    </Box>
+    <>
+      <Box sx={{ p: 3, flex: "1 1 auto" }}>
+        <ErrorBoundary fallback={<p>Something went wrong</p>}>
+          <Box
+            sx={{
+              maxWidth: "65%",
+              mx: "auto",
+            }}
+            dangerouslySetInnerHTML={{ __html: output }}
+          />
+        </ErrorBoundary>
+      </Box>
+    </>
   );
 }

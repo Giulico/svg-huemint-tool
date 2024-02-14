@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { isValidHexColor } from "../utils/string";
+import { isEqual } from "lodash";
 
 const prefix = "svg-huemint-tool_";
 
@@ -31,9 +32,9 @@ export const useMode = create(
       {
         name: `${prefix}mode`,
       }
-    )
-  ),
-  { name: "useMode" }
+    ),
+    { name: "useMode" }
+  )
 );
 
 export const useBlockedColros = create(
@@ -129,5 +130,43 @@ export const useResults = create(
       }
     ),
     { name: "useResults" }
+  )
+);
+
+export const useSavedColors = create(
+  devtools(
+    persist(
+      (set) => ({
+        selectedList: "list1",
+        lists: {
+          list1: [],
+          list2: [],
+          list3: [],
+          list4: [],
+          list5: [],
+        },
+        setSelectedList: (list) => set({ selectedList: list }),
+        savePalette: (list, palette) =>
+          set((s) => ({
+            ...s,
+            lists: {
+              ...s.lists,
+              [list]: [...s.lists[list], palette],
+            },
+          })),
+        removePalette: (list, palette) =>
+          set((s) => ({
+            ...s,
+            lists: {
+              ...s.lists,
+              [list]: s.lists[list].filter((p) => !isEqual(p, palette)),
+            },
+          })),
+      }),
+      {
+        name: `${prefix}savedColors`,
+      }
+    ),
+    { name: "useSavedColors" }
   )
 );

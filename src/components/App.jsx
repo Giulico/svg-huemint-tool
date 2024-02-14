@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { removeCaseDuplicates } from "../utils/arrays";
-import { CssBaseline, Box } from "@mui/material";
+import { CssBaseline, Box, AppBar, Toolbar } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import SVGrecipient from "./SVGrecipient";
 import HuemintSettings from "./HuemintSettings";
@@ -8,6 +8,9 @@ import GenerateButton from "./GenerateButton";
 import ResultsButtons from "./ResultsButtons";
 import Output from "./Output";
 import { useSvgCode } from "../store";
+import SavePalette from "./SavePalette";
+import SavedListButtons from "./SavedListButtons";
+import ExportList from "./ExportList";
 
 const darkTheme = createTheme({
   palette: {
@@ -51,8 +54,15 @@ export default function App() {
           <GenerateButton colorsAmount={colors.length} />
         </Box>
         <Box sx={{ flex: "1 1 auto" }}>
+          <AppBar position="static" sx={{ width: "auto" }}>
+            <Toolbar>
+              <SavePalette />
+              <ExportList />
+            </Toolbar>
+          </AppBar>
           <Box sx={{ flex: 1, display: "flex", flexDirection: "row" }}>
             <ResultsButtons />
+            <SavedListButtons />
             <Output colors={colors} />
           </Box>
         </Box>

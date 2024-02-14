@@ -24,8 +24,6 @@ export default function SVGrecipient({ colors }) {
     [addCode]
   );
 
-  console.log(code);
-
   return (
     <Box>
       <Typography variant="h6" color="primary.contrastText">
