@@ -25,11 +25,7 @@ export default function SVGrecipient({ colors }) {
   );
 
   return (
-    <Box>
-      <Typography variant="h6" color="primary.contrastText">
-        SVG recipient
-      </Typography>
-
+    <Box sx={{ p: 1 }}>
       <TextareaAutosize
         aria-label="SVG Recipient"
         minRows={3}

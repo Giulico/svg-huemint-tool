@@ -133,6 +133,22 @@ export const useResults = create(
   )
 );
 
+export const usePaletteMulti = create(
+  devtools(
+    persist(
+      (set) => ({
+        palette_multi: null,
+        setPaletteMulti: (newPaletteMulti) =>
+          set({ palette_multi: newPaletteMulti }),
+      }),
+      {
+        name: `${prefix}paletteMulti`,
+      }
+    ),
+    { name: "usePaletteMulti" }
+  )
+);
+
 export const useSavedColors = create(
   devtools(
     persist(

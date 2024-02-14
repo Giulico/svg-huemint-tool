@@ -1,6 +1,6 @@
 import { useMemo, useCallback, useEffect } from "react";
 import { useBlockedColros } from "../store";
-import { Box, Typography, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 
 export default function BlockedColors({ colorAmount }) {
   const { palette, setPalette, setPaletteColorAtIndex } = useBlockedColros();
@@ -22,9 +22,6 @@ export default function BlockedColors({ colorAmount }) {
 
   return (
     <Box sx={{ mt: 3 }}>
-      <Typography variant="h6" color="primary.contrastText" sx={{ mt: 3 }}>
-        Blocked Colors
-      </Typography>
       {colors_.map((_, i) => (
         <TextField
           label={`Color #${i + 1}`}

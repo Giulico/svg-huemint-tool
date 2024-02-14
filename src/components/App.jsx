@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { removeCaseDuplicates } from "../utils/arrays";
-import { CssBaseline, Box, AppBar, Toolbar } from "@mui/material";
+import { CssBaseline, Box, AppBar, Toolbar, Typography } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import SVGrecipient from "./SVGrecipient";
 import HuemintSettings from "./HuemintSettings";
@@ -11,6 +11,7 @@ import { useSvgCode } from "../store";
 import SavePalette from "./SavePalette";
 import SavedListButtons from "./SavedListButtons";
 import ExportList from "./ExportList";
+import { grey } from "@mui/material/colors";
 
 const darkTheme = createTheme({
   palette: {
@@ -41,17 +42,24 @@ export default function App() {
           sx={{
             width: "25%",
             flexShrink: 0,
-            backgroundColor: "primary.dark",
-            padding: 1,
+            backgroundColor: grey["900"],
             height: "100vh",
             overflow: "auto",
           }}
         >
+          <Typography variant="h6" sx={{ px: 1 }}>
+            SVG recipient
+          </Typography>
           <SVGrecipient colors={colors} />
 
+          <Typography variant="h6" sx={{ px: 1, mt: 3 }}>
+            Settings
+          </Typography>
           <HuemintSettings colors={colors} />
 
-          <GenerateButton colorsAmount={colors.length} />
+          <Box sx={{ px: 3 }}>
+            <GenerateButton colorsAmount={colors.length} />
+          </Box>
         </Box>
         <Box sx={{ flex: "1 1 auto" }}>
           <AppBar position="static" sx={{ width: "auto" }}>

@@ -118,10 +118,6 @@ export default function AdjacencyInput({ colorAmount }) {
 
   return (
     <Box sx={{ mt: 3 }}>
-      <Typography variant="h6" color="primary.contrastText">
-        Adjacency
-      </Typography>
-
       <Stack direction="row" sx={{ placeItems: "center" }}>
         <Box>
           <Box
