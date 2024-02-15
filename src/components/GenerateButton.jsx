@@ -11,6 +11,9 @@ import {
   useResults,
   usePaletteMulti,
 } from "../store";
+import { getDefaultPaletteMulti } from "../utils/paletteMulti";
+import { COLUMNS_N } from "./PaletteMulti";
+import { isEqual } from "lodash";
 
 export default function GenerateButton({ colorsAmount }) {
   const { setResults, setLoading } = useResults();
@@ -30,6 +33,8 @@ export default function GenerateButton({ colorsAmount }) {
     console.log("mode", mode);
     console.groupEnd();
 
+    const defaultPaletteMulti = getDefaultPaletteMulti(colorsAmount, COLUMNS_N);
+
     const json_data = {
       mode, // transformer, diffusion or random
       num_colors: colorsAmount, // max 12, min 2
@@ -37,7 +42,9 @@ export default function GenerateButton({ colorsAmount }) {
       num_results: 50, // max 50 for transformer, 5 for diffusion
       adjacency, // nxn adjacency matrix as a flat array of strings
       palette, // locked colors as hex codes, or '-' if blank
-      palette_multi,
+      palette_multi: isEqual(defaultPaletteMulti, palette_multi)
+        ? undefined
+        : palette_multi,
     };
 
     setLoading(true);

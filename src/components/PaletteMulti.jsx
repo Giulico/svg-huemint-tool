@@ -5,28 +5,23 @@ import { useEffect } from "react";
 import { useMemo } from "react";
 import { usePaletteMulti } from "../store";
 import { useRef } from "react";
+import { getDefaultPaletteMulti } from "../utils/paletteMulti";
+
+export const COLUMNS_N = 10;
 
 export default function PaletteMulti({ colorAmount }) {
   const { palette_multi, setPaletteMulti } = usePaletteMulti();
 
   const ref = useRef();
-  const columns = useMemo(() => Array.from({ length: 9 }), []);
+  const columns = useMemo(() => Array.from({ length: COLUMNS_N }), []);
   const colors_ = useMemo(() => Array.from(Array(colorAmount)), [colorAmount]);
 
   const defaultPaletteMulti = useMemo(() => {
-    const defaultPaletteMulti = [];
-    for (let i = 0; i < columns.length; i++) {
-      const row = [];
-      for (let j = 0; j < colorAmount; j++) {
-        row.push("-");
-      }
-      defaultPaletteMulti.push(row);
-    }
-    return defaultPaletteMulti;
-  }, [colorAmount, columns.length]);
+    return getDefaultPaletteMulti(colorAmount, COLUMNS_N);
+  }, [colorAmount]);
 
   useEffect(() => {
-    if (!Array.isArray(palette_multi)) {
+    if (!Array.isArray(palette_multi) || palette_multi.length !== COLUMNS_N) {
       console.log("set def", defaultPaletteMulti);
       setPaletteMulti(defaultPaletteMulti);
     }
