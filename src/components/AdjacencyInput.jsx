@@ -107,6 +107,13 @@ export default function AdjacencyInput({ colorAmount }) {
     [storeAdjacency]
   );
 
+  const changeAdjacencyArray = useCallback(
+    (e) => {
+      storeAdjacency.setAdjacencyArray(e.target.value);
+    },
+    [storeAdjacency]
+  );
+
   useEffect(() => {
     if (
       !Array.isArray(storeAdjacency.adjacency) ||
@@ -196,6 +203,18 @@ export default function AdjacencyInput({ colorAmount }) {
               ))}
           </Box>
         </Box>
+
+        <Typography sx={{ mt: 2 }}>Or paste an adjacency array</Typography>
+        <Typography variant="caption">
+          This will override the table above
+        </Typography>
+        <TextField
+          label="Adjacency array"
+          variant="standard"
+          sx={{ mx: 1 }}
+          onChange={changeAdjacencyArray}
+          defaultValue={storeAdjacency.adjacency_array}
+        />
       </Box>
 
       <Dialog

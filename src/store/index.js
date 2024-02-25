@@ -80,9 +80,13 @@ export const useAdjacency = create(
     persist(
       (set, get) => ({
         adjacency: null,
+        adjacency_array: null,
         savedAdjacency: [],
         setAdjacency: (newAdjacency) => {
           set({ adjacency: newAdjacency });
+        },
+        setAdjacencyArray: (newAdjacency) => {
+          set({ adjacency_array: newAdjacency });
         },
         setAdjacencyAtIndex: (index, newValue) => {
           if (Number.isFinite(Number(newValue))) {

@@ -18,7 +18,7 @@ import { isEqual } from "lodash";
 export default function GenerateButton({ colorsAmount }) {
   const { setResults, setLoading } = useResults();
   const { code, setPalette } = useSvgCode();
-  const { adjacency } = useAdjacency();
+  const { adjacency, adjacency_array } = useAdjacency();
   const { temperature } = useTemperature();
   const { mode } = useMode();
   const { palette } = useBlockedColros();
@@ -27,6 +27,7 @@ export default function GenerateButton({ colorsAmount }) {
   const generate = useCallback(async () => {
     console.group("Generate settings");
     console.log("adjacency", adjacency);
+    console.log("adjacency_array", JSON.parse(adjacency_array));
     console.log("temperature", temperature);
     console.log("palette", palette);
     console.log("palette_multi", palette_multi);
@@ -40,7 +41,7 @@ export default function GenerateButton({ colorsAmount }) {
       num_colors: colorsAmount, // max 12, min 2
       temperature, // max 2.4, min 0
       num_results: 50, // max 50 for transformer, 5 for diffusion
-      adjacency, // nxn adjacency matrix as a flat array of strings
+      adjacency: adjacency_array ? JSON.parse(adjacency_array) : adjacency, // nxn adjacency matrix as a flat array of strings
       palette, // locked colors as hex codes, or '-' if blank
       palette_multi: isEqual(defaultPaletteMulti, palette_multi)
         ? undefined
